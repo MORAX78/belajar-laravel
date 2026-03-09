@@ -2,9 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
 //get = melihat data atau menampilkannya
 //post = mengirim data
 //put/patch = merubah atau mengedit data
@@ -42,3 +39,15 @@ Route::get('volumelimas', [App\Http\Controllers\VolumeLimasController::class, 'i
 // Route::delete('volumelimas/delete/{id}', [App\Http\Controllers\VolumeLimasController::class, 'destroy'])->name('volumelimas.destroy');
 Route::resource('volumelimas', App\Http\Controllers\VolumeLimasController::class);
 Route::resource('pesertapelatihan', App\Http\Controllers\PesertaPelatihan::class);
+
+Route::get('belajar-laravel' , [\App\Http\Controllers\BelajarController::class, 'index']);
+Route::get('siswa', [\App\Http\Controllers\BelajarController::class, 'getSiswa']);
+
+Route::get('create', [\App\Http\Controllers\BelajarController::class, 'create'])->name('siswa.create');
+Route::post('store', [\App\Http\Controllers\BelajarController::class, 'store'])->name('siswa.store');
+
+Route::get('/', [\App\Http\Controllers\LoginController::class, 'index']);
+Route::post('action-login', [App\Http\Controllers\LoginController::class, 'actionLogin'])->name('action-login');
+Route::post('logout', [App\Http\Controllers\LoginController::class, 'logout'])->name('logout');
+Route::get('dashboard', [\App\Http\Controllers\DashboardController::class, 'index']);
+
