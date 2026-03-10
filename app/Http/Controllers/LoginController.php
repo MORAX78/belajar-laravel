@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class LoginController extends Controller
 {
@@ -21,10 +22,9 @@ class LoginController extends Controller
         $request->session()->regenerate();
         return redirect('/dashboard');
     }
-    return back()->withErrors([
-        'email' => 'Please check your email and password'
+        Alert::error('Login Failed', 'Invalid Credential!!!');
 
-    ]);
+        return back();
     }
     public function logout(Request $request)
     {

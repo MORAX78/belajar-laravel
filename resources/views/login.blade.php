@@ -39,7 +39,7 @@
 </head>
 
 <body>
-
+    @include('sweetalert::alert')
   <main>
     <div class="container">
 
@@ -72,7 +72,7 @@
                       <label for="yourUsername" class="form-label">Email</label>
                       <div class="input-group has-validation">
                         <span class="input-group-text" id="inputGroupPrepend">@</span>
-                        <input type="text" name="email" class="form-control" id="yourUsername" required>
+                        <input type="text" name="email" class="form-control" id="yourUsername" required value="{{ old('email') }}">
                         <div class="invalid-feedback">Please enter your email.</div>
                       </div>
                     </div>
