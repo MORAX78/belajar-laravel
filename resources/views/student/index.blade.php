@@ -28,7 +28,7 @@
                             <td>{{ $student->email }}</td>
                             <td>{{ $student->gender == 1 ?'Male': 'Female' }}</td>
                             <td>{{ $student->phone }}</td>
-                            <td><img src="{{ asset('storage/' . $student->name) }}"></td>
+                            <td><img src="{{ asset('uploads/students/' . $student->image) }}" width="80"></td>
                             <td>
                                 <a href="{{ route('student.edit', $student->id) }}" class="btn btn-primary btn-sm">Edit</a>
                                 <form id="delete-form{{ route('student.destroy', $student->id) }}" method="post" class="d-inline" action="{{ route('student.destroy', $student->id) }}">

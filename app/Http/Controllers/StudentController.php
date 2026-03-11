@@ -37,12 +37,12 @@ class StudentController extends Controller
             'gender' => 'nullable',
             'phone' => 'nullable',
             'address' => 'nullable',
-            'image' => 'nullable|image|mimes:jpg, png, jpeg|max:2048'
+            'image' => 'nullable|image|mimes:jpg,png,jpeg|max:2048'
         ]);
 
         $imageName = null;
         if($request->hasFile('image')){
-            $imageName = time(). '.' .$request->image->extensions();
+            $imageName = time(). '.' .$request->image->extension();
             $request->image->move(public_path('uploads/students'), $imageName);
         }
         // insert into users() values()
@@ -87,7 +87,7 @@ class StudentController extends Controller
             'gender' => 'nullable',
             'phone' => 'nullable',
             'address' => 'nullable',
-            'image' => 'nullable|image|mimes:jpg, png, jpeg|max:2048'
+            'image' => 'nullable|image|mimes:jpg,png,jpeg|max:2048'
         ]);
 
         $student = Student::findOrFail($id);
@@ -99,7 +99,7 @@ class StudentController extends Controller
             }
             //gambar baru
             $imageName = time(). '.' .$request->image->extension();
-            $request->image->move(public_path('uploas/students'), $imageName);
+            $request->image->move(public_path('uploads/students'), $imageName);
         }
             $student->name = $request->name;
             $student->email = $request->email;

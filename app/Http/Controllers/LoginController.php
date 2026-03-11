@@ -24,7 +24,7 @@ class LoginController extends Controller
     }
         Alert::error('Login Failed', 'Invalid Credential!!!');
 
-        return back();
+        return back()->withInput();
     }
     public function logout(Request $request)
     {

@@ -53,6 +53,7 @@ Route::post('logout', [App\Http\Controllers\LoginController::class, 'logout'])->
 Route::resource('user', App\Http\Controllers\UserController::class);
 Route::resource('role', App\Http\Controllers\RoleController::class);
 Route::resource('student', App\Http\Controllers\StudentController::class);
+Route::resource('attendance', App\Http\Controllers\AttendanceController::class);
 Route::get('dashboard', [\App\Http\Controllers\DashboardController::class, 'index']);
 
 
