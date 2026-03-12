@@ -196,19 +196,24 @@
         </a>
       </li><!-- End F.A.Q Page Nav -->
 
-      <li class="nav-item">
+    <li class="nav-item">
         <a class="nav-link collapsed" href="{{ route('student.index') }}">
           <i class="bi bi-person-lines-fill"></i>
           <span>Student</span>
         </a>
-      </li><!-- End Contact Page Nav -->
-
-      <li class="nav-item">
+    </li><!-- End Contact Page Nav -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="{{ route('attendance.index') }}">
+        <i class="bi bi-card-list"></i>
+        <span>Attendance</span>
+        </a>
+    </li>
+      {{-- <li class="nav-item">
         <a class="nav-link collapsed" href="pages-register.html">
           <i class="bi bi-card-list"></i>
           <span>Register</span>
         </a>
-      </li><!-- End Register Page Nav -->
+      </li><!-- End Register Page Nav --> --}}
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="pages-login.html">

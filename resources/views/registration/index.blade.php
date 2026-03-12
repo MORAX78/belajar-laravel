@@ -8,24 +8,49 @@
 
 <style>
 
+body{
+background:#e5e5e5;
+font-family:Arial, Helvetica, sans-serif;
+}
+
+.form-container{
+background:white;
+padding:20px;
+box-shadow:0 0 10px rgba(0,0,0,0.2);
+margin-top:40px;
+margin-bottom:40px;
+}
+
 table{
-border:1px solid black;
+width:100%;
+border-collapse:collapse;
 }
 
 td{
-border:1px solid black;
-padding:6px;
+border:1px solid #555;
+padding:8px;
+font-size:14px;
+}
+
+.header{
+text-align:center;
+background:#f0f0f0;
 }
 
 input, textarea{
 border:none;
 width:100%;
+background:transparent;
 outline:none;
 }
 
-.title{
-text-align:center;
+textarea{
+resize:none;
+}
+
+.check{
 font-weight:bold;
+background:#f7f7f7;
 }
 
 </style>
@@ -34,25 +59,27 @@ font-weight:bold;
 
 <body>
 
-<div class="container mt-4">
+<div class="container">
+
+<div class="form-container">
 
 <form action="{{ route('registration.store') }}" method="POST">
 @csrf
 
-<table class="table">
+<table>
 
-<tr>
-<td colspan="4" class="title">
+<tr class="header">
+<td colspan="4">
 <h5>PPKD HOTEL</h5>
 Formulir Pendaftaran / Registration Form
 </td>
 </tr>
 
 <tr>
-<td>Room No</td>
-<td><input type="text" name="room_no"></td>
-<td>Jumlah Tamu</td>
-<td><input type="text" name="jumlah_tamu"></td>
+<td width="20%">Room No</td>
+<td width="30%"><input type="text" name="room_no"></td>
+<td width="20%">Jumlah Tamu</td>
+<td width="30%"><input type="text" name="jumlah_tamu"></td>
 </tr>
 
 <tr>
@@ -63,12 +90,12 @@ Formulir Pendaftaran / Registration Form
 </tr>
 
 <tr>
-<td colspan="2">Receptionist</td>
-<td colspan="2"><input type="text" name="receptionist"></td>
+<td>Receptionist</td>
+<td colspan="3"><input type="text" name="receptionist"></td>
 </tr>
 
-<tr>
-<td colspan="4"><b>Check Out Time : 12.00 Noon</b></td>
+<tr class="check">
+<td colspan="4">Check Out Time : 12.00 Noon</td>
 </tr>
 
 <tr>
@@ -110,7 +137,7 @@ Tanggal Kedatangan
 <tr>
 <td>Alamat</td>
 <td colspan="3">
-<textarea name="alamat" rows="2"></textarea>
+<textarea rows="2" name="alamat"></textarea>
 </td>
 </tr>
 
@@ -134,7 +161,7 @@ Tanggal Kedatangan
 <tr>
 <td>Catatan</td>
 <td colspan="3">
-<textarea name="catatan" rows="3"></textarea>
+<textarea rows="3" name="catatan"></textarea>
 </td>
 </tr>
 
@@ -154,14 +181,14 @@ Tanggal Kedatangan
 </table>
 
 <div class="text-center mt-3">
-
 <button class="btn btn-primary">
 Simpan
 </button>
-
 </div>
 
 </form>
+
+</div>
 
 </div>
 

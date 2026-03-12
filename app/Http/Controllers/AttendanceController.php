@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Attendance;
 use App\Models\Student;
 use Illuminate\Http\Request;
-
+use RealRashid\SweetAlert\Facades\Alert;
 class AttendanceController extends Controller
 {
     /**
@@ -32,7 +32,34 @@ class AttendanceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $date = $request->date;
+        $attendances = $request->attendances;
+        foreach($attendances as $attendance){
+            // jika datanya ada, kita update
+            $existingAttendance = Attendance::where('student_id', $attendance['student_id'])->whereDate('date', $date)->first();
+            if($existingAttendance){
+                $existingAttendance->update([
+                    'status_in' => $attendance['status_in'] ?? null,
+                    'check_in' => $attendance['check_in'] ?? null,
+                    'status_out' => $attendance['status_out'] ?? null,
+                    'check_out' => $attendance['check_out'] ?? null,
+                    'note' => $attendance['note'] ?? null,
+                ]);
+            }else{
+                Attendance::create([
+                    'student_id' => $attendance['student_id'],
+                    'date' => $date,
+                    'status_in' => $attendance['status_in'] ?? null,
+                    'check_in' => $attendance['check_in'] ?? null,
+                    'status_out' => $attendance['status_out'] ?? null,
+                    'check_out' => $attendance['check_out'] ?? null,
+                    'note' => $attendance['note'] ?? null,
+                ]);
+            }
+            // kalau tidak ada insert
+        }
+        Alert::success('Success', 'Attendance created successfully');
+        return redirect()->route('attendance.index');
     }
 
     /**
@@ -48,7 +75,9 @@ class AttendanceController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $attendance = Attendance::with('student')->findOrFail($id);
+        $title = 'Edit Attendance';
+        return view('attendance.edit', compact('attendance', 'title'));
     }
 
     /**
@@ -56,7 +85,23 @@ class AttendanceController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'date' => 'required|date',
+            'status_in' => 'nullable|string',
+            'status_out' => 'nullable|string',
+        ]);
+
+        $attendance = Attendance::findOrFail($id);
+        $attendance->update([
+            'date' => $request->date,
+            'status_in' => $request->status_in,
+            'check_in' => $request->check_in,
+            'status_out' => $request->status_out,
+            'check_out' => $request->check_out,
+            'note' => $request->note,
+        ]);
+        Alert::success('Success', 'Data Attendance has been updated');
+        return redirect()->route('attendance.index');
     }
 
     /**
