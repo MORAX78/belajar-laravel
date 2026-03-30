@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Socialite\Socialite;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class LoginController extends Controller
@@ -32,6 +34,35 @@ class LoginController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect()->to('/');
+    }
+    public function redirect() {
+        return Socialite::driver('google')->redirect();
+    }
+
+    public function callbackGoogle()
+    {
+        try {
+            $google_user = Socialite::driver('google')->user();
+
+            $user = User::where('google_id', $google_user->getId())->first();
+            if (empty($user)) {
+                $new_user = User::create([
+                    'name' => $google_user->getName(),
+                    'email' => $google_user->getEmail(),
+                    'google_id' => $google_user->getId(),
+                    'role_id' => 1
+                ]);
+
+                Auth::login($new_user);
+
+                return redirect()->intended('dashboard');
+            }else{
+                Auth::login($user);
+                return redirect()->intended('dashboard');
+            }
+        } catch (\Throwable $th) {
+            dd('Sesuatu ada yang salah!'. $th->getMessage());
+        }
     }
 
 }

@@ -55,5 +55,6 @@ Route::resource('role', App\Http\Controllers\RoleController::class);
 Route::resource('student', App\Http\Controllers\StudentController::class);
 Route::resource('attendance', App\Http\Controllers\AttendanceController::class);
 Route::get('dashboard', [\App\Http\Controllers\DashboardController::class, 'index']);
-
+Route::get('auth/google', [\App\Http\Controllers\LoginController::class, 'redirect'])->name('google-auth');
+Route::get('auth/google/call-back', [\App\Http\Controllers\LoginController::class, 'callbackGoogle']);
 
